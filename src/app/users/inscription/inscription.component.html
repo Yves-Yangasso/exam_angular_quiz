@@ -1,0 +1,17 @@
+<div class="text-light overflow-hidden default" style="background-image: url('images/img3.jpg');">
+    <div class="card auth-card">
+        <div class="auth-container">
+            <h2 class="auth-title">Inscription</h2>
+            <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+                <input type="text" formControlName="name" placeholder="Nom d'utilisateur" required>
+                <input type="email" formControlName="email" placeholder="Email d'utilisateur" required>
+                <input type="password" formControlName="password" placeholder="Mot de passe" required>
+                <input type="password" formControlName="confirmPassword" placeholder="Confirmer le mot de passe" required>
+                <button type="submit" class="btn btn-primary">S'inscrire</button>
+            </form>
+            <div class="login-prompt d-flex">
+                <p>Vous avez déjà un compte ? <a class="nav-link text-primary" [routerLink]="['/connexion']">Se connecter</a></p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+<div class="overflow-hidden default w-100"  style="background-image: url('images/img3.jpg');">
+    <button class="btn btn-primary m-3" data-toggle="modal" data-target="#addQuizModal">Voir le Classement</button>
+    <div class="container text-dark mt-5">
+        <h1>Quiz Collaboratif</h1>
+        
+        <div *ngIf="!selectedQuiz">
+            <h2>Liste des Quiz</h2>
+            <div class="row overflow-auto">
+                <div *ngFor="let quiz of quizze" class="col-lg-6 quiz-item overflow-auto">
+                    <button (click)="startQuiz(quiz)" class="quiz-button w-100">{{ quiz.title }}</button>
+                </div>
+            </div>
+        </div>
+  
+        <div *ngIf="selectedQuiz && !finished">
+            <h3>{{ currentQuestion?.question_text }}</h3>
+            <div *ngFor="let answer of currentQuestion?.answers" class="answer-option rs">
+                <input type="radio" [value]="answer.id" name="option" (change)="selectAnswer(answer,selectedQuiz.id)" />
+                <label class="">{{ answer.answer_text }}</label>
+            </div>
+            <button (click)="nextQuestion()" class="next-button">Suivant</button>
+            <div class="progress-bar ">
+                <div class="progress" [style.width]="getProgress()"></div>
+            </div>
+        </div>
+  
+        <div *ngIf="finished">
+            <h2>Votre score final est : {{ score }}</h2>
+            <button (click)="restartQuiz()" class="restart-button">Recommencer</button>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="addQuizModal" tabindex="-1" role="dialog" aria-labelledby="addQuizModalLabel" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addQuizModalLabel">Le Classement des Meilleurs Joueurs</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body bg-warning">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Joueurs</th>
+                            <th>Scores</th>
+                        </tr>
+                    </thead>
+                    <tbody id="questionTableBody">
+            
+                        <tr *ngFor="let attempt of score_tmp">
+                            <td>{{ attempt.nom }}</td>
+                            <td>{{ attempt.score }}</td>
+                            
+                        </tr>
+                        <tr *ngIf="questions.length === 0">
+                            <td colspan="3">Aucune attempt trouvée.</td>
+                        </tr>
+                      
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('addQuizForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const title = document.getElementById('quizTitle').value;
+        const description = document.getElementById('quizDescription').value;
+        const creatorId = document.getElementById('creatorId').value;
+
+        const tableBody = document.getElementById('quizTableBody');
+        
+        
+
+        document.getElementById('addQuizForm').reset();
+        $('#addQuizModal').modal('hide');
+    });
+</script>

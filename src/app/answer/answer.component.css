@@ -1,0 +1,8 @@
+.default {
+    color: white;
+    overflow: hidden;
+    height: 100vh;
+    background: linear-gradient(270deg, #91CB3E, #f06d06, #53A548);
+    background-size: cover;
+    animation: gradientAnimation 15s ease infinite;
+ }

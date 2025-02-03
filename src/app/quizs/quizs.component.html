@@ -1,0 +1,81 @@
+
+<div class="text-dark overflow-hidden default" style="background-image: url('images/img3.jpg');">
+    <div class="m-3">
+        <h2 class="text-light">Liste des Quiz</h2>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#addQuizModal" (click)="ActionAjouter()">Ajouter un Quiz</button>
+
+    <table class="table table-bordered mt-3 text-light">
+        <thead class="bg-success">
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="quizTableBody" class="bg-dark">
+            <tr *ngFor="let quiz of quizzes">
+                <td>{{ quiz.title }}</td>
+                <td>{{ quiz.description }}</td>
+                <td>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#addQuizModal" (click)="ActionModifier(quiz)">Modifier</button> <span>||</span>
+                    <button class="btn btn-danger" (click)="deleteQuiz(quiz.id)">Supprimer</button>
+                </td>
+            </tr>
+            <tr *ngIf="quizzes.length === 0">
+                <td colspan="3">Aucune question trouvée.</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+
+<div class="modal fade" id="addQuizModal" tabindex="-1" role="dialog" aria-labelledby="addQuizModalLabel" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addQuizModalLabel">{{ info_quiz }} un Quiz</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body bg-success">
+                <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" id="addQuizForm">
+                    <div class="form-group">
+                        <label for="quizTitle">Titre</label>
+                        <input formControlName="titre" ngModel="{{name_tmp}}" type="text" class="form-control" id="quizTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quizDescription">Description</label>
+                        <textarea formControlName="description" ngModel="{{description_tmp}}" class="form-control" id="quizDescription" required></textarea>
+                    </div>
+                  
+                    <div class="mt-2 text-center">
+                        <button type="submit" class="btn btn-primary w-50">Ajouter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('addQuizForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const title = document.getElementById('quizTitle').value;
+        const description = document.getElementById('quizDescription').value;
+        const creatorId = document.getElementById('creatorId').value;
+
+        const tableBody = document.getElementById('quizTableBody');
+        const newRow = `<tr>
+            <td>${title}</td>
+            <td>${description}</td>
+            <td>${creatorId}</td>
+        </tr>`;
+        tableBody.insertAdjacentHTML('beforeend', newRow);
+
+        document.getElementById('addQuizForm').reset();
+        $('#addQuizModal').modal('hide');
+    });
+</script>
+

@@ -1,0 +1,101 @@
+<div class="text-dark overflow-hidden default"  style="background-image: url('images/img3.jpg');">
+   <div class="m-3">
+    <h2 class="text-light">Liste des Questions</h2>
+    <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#addQuestionModal" onclick="ActionAjouter()">Ajouter une Question</button>
+
+    <table class="table table-bordered text-light">
+        <thead class="bg-success">
+            <tr>
+                <th>Quiz</th>
+                <th>Question</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="questionTableBody" class="bg-dark">
+
+            <tr *ngFor="let question of questions">
+                <td>{{ question.quiz }}</td>
+                <td>{{ question.question }}</td>
+                <td>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#addQuestionModal" onclick="ActionModifier(question)">Modifier</button> <span>||</span>
+                    <button class="btn btn-danger" (click)="deleteQuestion(question.id)">Supprimer</button>
+                </td>
+            </tr>
+            <tr *ngIf="questions.length === 0">
+                <td colspan="3">Aucune question trouvée.</td>
+            </tr>
+          
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal pour ajouter une question -->
+<div class="modal fade" id="addQuestionModal" tabindex="-1" role="dialog" aria-labelledby="addQuestionModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addQuestionModalLabel">{{info_question}} une Question</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body bg-success">
+               <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="quizID">Quiz</label>
+        <select id="quizID" class="form-control" formControlName="quiz" required>
+            <option value="" disabled selected>Sélectionnez un quiz</option>
+            <option *ngFor="let quiz of quizzes" [value]="quiz.id">{{ quiz.title }}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="questionText">Question</label>
+        <textarea class="form-control" id="questionText" formControlName="question" [ngModel]="description_tmp" required></textarea>
+    </div>
+    <div class="mt-2 text-center">
+        <button type="submit" class="btn btn-primary w-50" [disabled]="registrationForm.invalid">Ajouter</button>
+    </div>
+</form>
+            </div>
+        </div>
+    </div>
+   </div>
+</div>
+
+<script>
+    document.getElementById('addQuestionForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const quizId = document.getElementById('quizID').value;
+        const questionText = document.getElementById('questionText').value;
+
+        // Ajouter la question à la table dans le DOM
+        const tableBody = document.getElementById('questionTableBody');
+        const newRow = `<tr>
+            <td>${quizId}</td>
+            <td>${questionText}</td>
+        </tr>`;
+        tableBody.insertAdjacentHTML('beforeend', newRow);
+
+        // Réinitialiser le formulaire et fermer le modal
+        document.getElementById('addQuestionForm').reset();
+        $('#addQuestionModal').modal('hide');
+
+        // Ici, vous pouvez envoyer les données à votre serveur via AJAX ou fetch
+        fetch('/api/questions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ quiz_id: quizId, question_text: questionText })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+        });
+    });
+</script>
+

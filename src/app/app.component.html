@@ -1,0 +1,20 @@
+<!-- <app-accueil-par-defaut></app-accueil-par-defaut> -->
+<nav class="navbar" *ngIf="router.url !== '/inscription' && router.url !== '/connexion' && router.url !== '/accueil-par-defaut'">
+    <div class="navbar-container">
+        <h1 class="logo">YanGame</h1>
+        <ul class="nav-menu">
+            <li><a class="nav-link active" [routerLink]="['/accueil']">Accueil</a></li>
+            <li><a class="nav-link " [routerLink]="['/quizs']">Quizs</a></li>
+            <li><a class="nav-link" [routerLink]="['/questions']">Questions</a></li>
+            <li><a class="nav-link" [routerLink]="['/answer']">Answer</a></li>
+          <!--- <li><a class="nav-link" [routerLink]="['/profil']">Profil</a></li> -->
+            
+        </ul>
+    </div>
+
+    <<h1 class="email-display" *ngIf="email">{{ email }}</h1>
+    <a href="" class="btn btn-danger">Deconnexion</a>
+</nav>
+<router-outlet><router-outlet />
+
+

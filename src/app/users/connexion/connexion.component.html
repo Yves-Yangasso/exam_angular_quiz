@@ -1,0 +1,15 @@
+<div class="text-light overflow-hidden default" style="background-image: url('images/img3.jpg');">
+  <div class="card auth-card mt-5">
+    <div class="auth-container">
+      <h2 class="auth-title">Connexion</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <input type="email" formControlName="email" placeholder="Email d'utilisateur" required>
+        <input type="password" formControlName="password" placeholder="Mot de passe" required>
+        <button type="submit" class="btn btn-primary">Se connecter</button>
+      </form>
+      <div class="register-prompt">
+        <p>Vous n'avez pas de compte ? <a class="nav-link btn text-primary" [routerLink]="['/inscription']">S'inscrire</a></p>
+      </div>
+    </div>
+  </div>
+</div>

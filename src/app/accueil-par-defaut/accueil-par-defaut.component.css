@@ -1,0 +1,113 @@
+.default {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+  text-align: center; /* Centre le texte */
+}
+
+.header {
+  flex: 1; /* Permet au header de prendre l'espace disponible */
+}
+
+.footer {
+  flex-shrink: 0; /* Empêche le footer de rétrécir */
+}
+
+
+.default {
+    color: white;
+    overflow: hidden;
+    height: 100vh;
+    background: linear-gradient(270deg, #91CB3E, #f06d06, #53A548);
+    background-size: 500% 400%;
+    animation: gradientAnimation 15s ease infinite;
+  }
+
+  .lead{
+    font-size: 25px;
+  }
+
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .light {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+    animation: blinkLights 1.5s infinite ease-in-out;
+  }
+
+  @keyframes blinkLights {
+    0% {
+      opacity: 0.3;
+      
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.3;
+    }
+  }
+
+  .quiz-title {
+    font-size: 2.5rem;
+    margin-top: 100px;
+  }
+
+  .quiz-title {
+    animation: fadeInUp 1s infinite alternate;
+  }
+
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+      
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      color: #53A548;
+    }
+  }
+
+  .textAnim{
+    animation: textAnim 2s infinite alternate;
+  }
+
+  @keyframes textAnim{
+    50%{
+        color: #53A548;
+    }
+  }
+
+
+
+  .btn-start {
+    font-size: 1.5rem;
+    padding: 15px 30px;
+    animation: anim 2s infinite alternate;
+  }
+
+  @keyframes anim{
+    25%{
+      border: 5px solid green;
+      background-color: aquamarine;
+      border-radius: 20% 20% 20% 20% ;
+      box-shadow: 10px 10px 10px 10px  white;
+    }
+  }

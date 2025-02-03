@@ -1,0 +1,19 @@
+.default {
+    color: white;
+    overflow: hidden;
+    height: 100vh;
+    background: linear-gradient(270deg, #91CB3E, #f06d06, #53A548);
+    background-size: cover;
+    animation: gradientAnimation 15s ease infinite;
+ }
+
+ body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+ header { background: #4CAF50; color: white; padding: 10px; text-align: center; }
+ .content { padding: 20px; }
+ .button { background: #008CBA; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+
+ .info{
+    position: absolute;
+    top: 20%;
+    left: 30%;
+ }

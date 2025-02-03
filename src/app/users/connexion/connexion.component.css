@@ -1,0 +1,89 @@
+.default {
+    color: white;
+    overflow: hidden;
+    height: 100vh;
+    background: linear-gradient(270deg, #91CB3E, #EEE82C, #53A548);
+    background-size: cover;
+    animation: gradientAnimation 15s ease infinite;
+  }
+
+
+  .auth-card {
+    max-width: 400px; /* Limite la largeur de la carte */
+    margin: 2rem auto; /* Centre la carte horizontalement */
+    padding: 1.5rem; /* Ajoute de l'espace à l'intérieur de la carte */
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre portée */
+    background-color: #fff; /* Couleur de fond blanc */
+    animation: btnAnimation 2s infinite alternate;
+}
+
+
+@keyframes btnAnimation{
+    0% { 
+        background-position: 0% 50%;
+     }
+    50% { 
+        background-position: 100% 50%; 
+        border-radius: 20% 20% 20% 20% ;
+        box-shadow: 3px 5px 3px 5px  rgb(26, 197, 20);
+        overflow: hidden;
+    }
+    100% { 
+        background-position: 0% 50%; 
+        border-radius: 20% 30% 30% 20% ;
+    }
+}
+
+.auth-container {
+    display: flex;
+    flex-direction: column; /* Aligne les éléments en colonne */
+    align-items: center; /* Centre les éléments horizontalement */
+}
+
+.auth-title {
+    margin-bottom: 1.5rem; /* Espace sous le titre */
+    color: #333; /* Couleur du texte */
+}
+
+input {
+    width: 100%; /* Prend toute la largeur de la carte */
+    padding: 0.75rem; /* Espace à l'intérieur des champs */
+    margin-bottom: 1rem; /* Espace entre les champs */
+    border: 1px solid #ccc; /* Bordure grise */
+    border-radius: 4px; /* Coins arrondis */
+    font-size: 1rem; /* Taille de la police */
+}
+
+input:focus {
+    border-color: #007bff; /* Couleur de la bordure au focus */
+    outline: none; /* Enlève le contour par défaut */
+}
+
+button {
+    width: 100%; /* Prend toute la largeur */
+    padding: 0.75rem; /* Espace à l'intérieur du bouton */
+    border: none; /* Enlève la bordure */
+    border-radius: 4px; /* Coins arrondis */
+    background-color: #007bff; /* Couleur de fond du bouton */
+    color: #fff; /* Couleur du texte du bouton */
+    font-size: 1rem; /* Taille de la police */
+    cursor: pointer; /* Change le curseur au survol */
+}
+
+button:hover {
+    background-color: #0056b3; /* Couleur au survol */
+}
+
+.register-prompt {
+    margin-top: 1rem; /* Espace au-dessus de la section d'inscription */
+}
+
+.register-link {
+    color: #007bff; /* Couleur du lien */
+    text-decoration: none; /* Enlève le soulignement */
+}
+
+.register-link:hover {
+    text-decoration: underline; /* Souligne le lien au survol */
+}
